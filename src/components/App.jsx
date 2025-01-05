@@ -3,14 +3,19 @@ import React, { useState } from "react";
 function App() {
 
     const [inputText, setInputText] = useState("");
+    const [items, setItems] = useState([]); // Array to store the items -> Task 2
 
     function handleChange(event) {
         setInputText(event.target.value);
         // console.log(event.target.value);
     }
 
-    function onClick() {
-        console.log("Clicked");
+    function addItem() {
+        // console.log("Clicked");
+        setItems((prevValue) => {
+            return [...prevValue, inputText];
+        });
+        setInputText(""); // Clear the input field after adding the item -> Task 2
     }
 
     return (
@@ -20,13 +25,15 @@ function App() {
         </div>
         <div className="form">
             <input onChange = {handleChange}type="text" value = {inputText}/>
-            <button onClick = {onClick}>
+            <button onClick = {addItem}>
             <span>Add</span>
             </button>
         </div>
         <div>
             <ul>
-            <li>A Item</li>
+                {items.map((todoItem) => {
+                    return <li>{todoItem}</li>
+                })}
             </ul>
         </div>
         </div>
