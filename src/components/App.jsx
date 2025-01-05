@@ -11,12 +11,23 @@ function App() {
         // console.log(event.target.value);
     }
 
+    // function addItem() {
+    //     // console.log("Clicked");
+    //     setItems((prevValue) => {
+    //         return [...prevValue, inputText];
+    //     });
+    //     setInputText(""); // Clear the input field after adding the item -> Task 2
+    // }
+
     function addItem() {
-        // console.log("Clicked");
-        setItems((prevValue) => {
-            return [...prevValue, inputText];
-        });
-        setInputText(""); // Clear the input field after adding the item -> Task 2
+        if (inputText !== "") { // This prevents users from entering empty tasks.
+            setItems((prevValue) => {
+                return [...prevValue, inputText]; // Spread operator to add the new task to the array
+            });
+            setInputText("");
+        } else {
+            alert("Please enter a valid task");
+        }
     }
 
     // Handle keypress in the input field
@@ -24,6 +35,11 @@ function App() {
         if (event.key === "Enter") {
             addItem();
         }
+    }
+
+    // Handle clear all items
+    function clearAll() {
+        setItems([]);
     }
 
     return (
@@ -35,6 +51,10 @@ function App() {
             <input onKeyDown = {handleKeyDown} onChange = {handleChange} type="text" value = {inputText}/>
             <button onClick = {addItem}>
             <span>Add</span>
+            </button>
+            
+            <button onClick = {clearAll}>
+            <span>Clear All</span>
             </button>
         </div>
         <div>
