@@ -19,13 +19,20 @@ function App() {
         setInputText(""); // Clear the input field after adding the item -> Task 2
     }
 
+    // Handle keypress in the input field
+    function handleKeyDown(event) {
+        if (event.key === "Enter") {
+            addItem();
+        }
+    }
+
     return (
         <div className="container">
         <div className="heading">
             <h1>To-Do List</h1>
         </div>
         <div className="form">
-            <input onChange = {handleChange}type="text" value = {inputText}/>
+            <input onKeyDown = {handleKeyDown} onChange = {handleChange} type="text" value = {inputText}/>
             <button onClick = {addItem}>
             <span>Add</span>
             </button>

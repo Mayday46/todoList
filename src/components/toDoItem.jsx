@@ -10,7 +10,12 @@ function TodoItem(props) { // Props is read-only
     function handleClick() {
         // console.log("Clicked");
         setisClicked((prevValue) => {
-            return !prevValue;
+            // if (prevValue === false) {
+            //     return true;
+            // } else {
+            //     return false;
+            // }
+            return !prevValue; // This is the same as the above if-else statement
         });
     }
     
