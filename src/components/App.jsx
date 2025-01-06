@@ -1,43 +1,26 @@
 import React, { useState } from "react";
-import TodoItem from "./toDoItem";
+import InputArea from "./InputArea";
+import ToDoItem from "./toDoItem";
 
 function App() {
+    const [items, setItems] = useState([]);
 
-    const [inputText, setInputText] = useState("");
-    const [items, setItems] = useState([]); // Array to store the items -> Task 2
-
-    function handleChange(event) {
-        setInputText(event.target.value);
-        // console.log(event.target.value);
-    }
-
-    // function addItem() {
-    //     // console.log("Clicked");
-    //     setItems((prevValue) => {
-    //         return [...prevValue, inputText];
-    //     });
-    //     setInputText(""); // Clear the input field after adding the item -> Task 2
-    // }
-
-    function addItem() {
-        if (inputText !== "") { // This prevents users from entering empty tasks.
-            setItems((prevValue) => {
-                return [...prevValue, inputText]; // Spread operator to add the new task to the array
-            });
-            setInputText("");
+    function addItem(inputText) {
+        if (inputText !== "") {
+            setItems((prevItems) => [...prevItems, inputText]);
         } else {
-            alert("Please enter a valid task");
+            alert("Please enter a task.");
         }
     }
 
-    // Handle keypress in the input field
-    function handleKeyDown(event) {
-        if (event.key === "Enter") {
-            addItem();
-        }
+    function deleteItem(id) {
+        setItems(prevItems => {
+        return prevItems.filter((item, index) => {
+            return index !== id;
+        });
+        });
     }
 
-    // Handle clear all items
     function clearAll() {
         setItems([]);
     }
@@ -47,21 +30,17 @@ function App() {
         <div className="heading">
             <h1>To-Do List</h1>
         </div>
-        <div className="form">
-            <input onKeyDown = {handleKeyDown} onChange = {handleChange} type="text" value = {inputText}/>
-            <button onClick = {addItem}>
-            <span>Add</span>
-            </button>
-            
-            <button onClick = {clearAll}>
-            <span>Clear All</span>
-            </button>
-        </div>
+        <InputArea onAdd={addItem} onClear = {clearAll}/>
         <div>
             <ul>
-                {items.map((todoItem) => {
-                    return <TodoItem text={todoItem} />;
-                })}
+            {items.map((todoItem, index) => (
+                <ToDoItem
+                key={index}
+                id={index}
+                text={todoItem}
+                // onChecked={deleteItem}
+                />
+            ))}
             </ul>
         </div>
         </div>

@@ -1,29 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 
-// Create a new component called TodoItem
-// This component will be used to display the list items
-// This component will receive the text of the item as a prop
-function TodoItem(props) { // Props is read-only
-    
-    const [isClicked, setisClicked] = useState(false);
+function ToDoItem(props) {
 
-    function handleClick() {
-        // console.log("Clicked");
-        setisClicked((prevValue) => {
-            // if (prevValue === false) {
-            //     return true;
-            // } else {
-            //     return false;
-            // }
-            return !prevValue; // This is the same as the above if-else statement
+    const [isClicked, setIsClicked] = React.useState(false);
+
+    function handleClicked() {
+        setIsClicked((prevValue) => {
+            return !prevValue;
         });
     }
-    
+
     return (
-        <li onClick = {handleClick} style = {{textDecoration: isClicked ? "line-through" : "none", cursor: "pointer"}}>
-            {props.text}
-        </li>
+        <div
+        // onClick={() => {
+        //     props.onChecked(props.id); // This is used to delete the item from the list
+        // }}
+        onClick = {handleClicked}
+        >
+        <li
+            style = {{
+                textDecoration: isClicked ? "line-through" : "none",
+                cursor: "pointer" // Shows pointer cursor on hover.
+            }}
+        >{props.text}</li>
+        </div>
     );
 }
 
-export default TodoItem;
+export default ToDoItem;
