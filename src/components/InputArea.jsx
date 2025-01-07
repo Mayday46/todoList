@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// All modification in this components is dedicated to Input Box
 
 function InputArea(props) {
     const [inputText, setInputText] = useState("");
