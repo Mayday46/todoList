@@ -8,10 +8,10 @@ function InputArea(props) {
         setInputText(newValue);
     }
 
-    function enterPressed(event) {
+    function enterPressed(event) { // Key function listener for ENTER
         if (event.key === "Enter") {
             props.onAdd(inputText);
-            setInputText("");
+            setInputText(""); // Clears the Input box after user hits ENTER
         }
     }
 
